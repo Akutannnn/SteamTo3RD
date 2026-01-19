@@ -1,10 +1,34 @@
 // OPTIONS
-const BuffEnabled = true;
-const PricempireEnabled = true;
+let BuffEnabled;
+let PricempireEnabled;
+
+async function getOptions() {
+    const opt = await chrome.storage.sync.get({
+        BuffEnabled: true,
+        PricempireEnabled: true
+    });
+        
+        if (opt.BuffEnabled !== undefined) {
+            BuffEnabled = opt.BuffEnabled;
+        }
+        else {
+            BuffEnabled = true;
+            console.log("Buff option not found, setting to default (enabled).");
+        };
+        if (opt.PricempireEnabled !== undefined) {
+            PricempireEnabled = opt.PricempireEnabled;
+        }
+        else {
+            PricempireEnabled = true;
+            console.log("Pricempire option not found, setting to default (enabled).");
+        }
+}
+
+async function main(){
+    await getOptions();
 
 
 console.log("SCM to 3rd party extension loaded.");
-
 
 //ITEM NAME EXTRACTION
 const URL = window.location.href;
@@ -52,9 +76,10 @@ let itemsDataPromise;
 
 
 //BUFF163 INTEGRATION
+let buffinsert = "";
 if (BuffEnabled) {
 
-    const buffimgurl = chrome.runtime.getURL('scripts/images/buff163icon.png');
+    const buffimgurl = chrome.runtime.getURL('images/buff163icon.png');
 
     function fetchBuff() {
         return loadItemsData().then((data) => {
@@ -63,19 +88,18 @@ if (BuffEnabled) {
         if (buffURL==undefined){
             console.log("Error : No BuffURL");
         } else {
-            let buffinsert = `<a href="${buffURL}" target="_blank"><img class="icons" src="${buffimgurl}" alt="Buff163"></a>`;
-            whattoinsert += buffinsert;
-            whattoinsert += ` `;
+            buffinsert = `<a href="${buffURL}" target="_blank"><img class="icons" src="${buffimgurl}" alt="Buff163"></a>`;
         };
     })};
 };
 
 
 //PRICEMPIRE INTEGRATION (ONLY FOR SKINS)
+let pricempireinsert = "";
 if (PricempireEnabled) {
     if (itemNamedec.includes("Factory New") || itemNamedec.includes("Minimal Wear") || itemNamedec.includes("Field-Tested") || itemNamedec.includes("Well-Worn") || itemNamedec.includes("Battle-Scarred")) {
 
-        const pricempireimgurl = chrome.runtime.getURL('scripts/images/pricempireicon.png');
+        const pricempireimgurl = chrome.runtime.getURL('images/pricempireicon.png');
         let PricempireURL = "https://pricempire.com/cs2-items/skin/"
         let stattrak = false;
         let souvenir = false;
@@ -138,20 +162,28 @@ if (PricempireEnabled) {
         else if (!stattrak && !souvenir) {
         PricempireURL += "?variant=" + condition;
         }
-        let pricempireinsert = `<a href="${PricempireURL}" target="_blank"><img class="icons" src="${pricempireimgurl}" alt="Pricempire"></a>`;
-        whattoinsert += pricempireinsert;
-        whattoinsert += ` `;
+        pricempireinsert = `<a href="${PricempireURL}" target="_blank"><img class="icons" src="${pricempireimgurl}" alt="Pricempire"></a>`;
     }    
 };
 
 
 
+//INSERTION IN PAGE
+async function buildAndInsert() {
+  await Promise.resolve(BuffEnabled? fetchBuff?.() : undefined);
 
-Promise.all([fetchBuff()]).then(() => {
-    console.log("All enabled options loaded.");
+    if (BuffEnabled) whattoinsert += buffinsert;
+
+    if (PricempireEnabled)whattoinsert += pricempireinsert;
+
     whattoinsert += ` `;
     whattoinsert += `</div>`;
-    console.log(whattoinsert);
     if (wheretoinsert !== null) {
         wheretoinsert.insertAdjacentHTML("beforebegin", whattoinsert);};
-});
+}
+
+buildAndInsert()
+
+}
+
+main()
