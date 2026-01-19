@@ -1,12 +1,13 @@
 {
   "name": "SCM To 3rd Party",
-  "description": "Adds a button to lookup the item on another marketplace (e.g. Buff, Csfloat...)",
+  "description": "Adds a button to lookup the item on another marketplace (e.g. Buff, Pricempire...)",
   "version": "1.0",
   "manifest_version": 3,
-  "host_permissions": [
-    "https://raw.githubusercontent.com/*",
-    "https://github.com/*"
-  ],
+  "options_ui": {
+    "page": "options/options.html",
+    "open_in_tab": true
+  },
+  
   "permissions": [
     "storage",
     "activeTab",
@@ -15,14 +16,14 @@
 
   "action": {
     "default_popup": "popup/popup.html",
-    "default_icon": "popup/images/icon.png",
+    "default_icon": "/images/icon.png",
     "default_title": "SCM To 3rd Party"
   },
   "icons" : {
-    "16": "popup/images/16.png",
-    "32": "popup/images/32.png",
-    "48": "popup/images/48.png",
-    "128": "popup/images/128.png"
+    "16": "images/16.png",
+    "32": "images/32.png",
+    "48": "images/48.png",
+    "128": "images/128.png"
   },
   "content_scripts": [
   {
@@ -30,7 +31,7 @@
      "matches": [
        "https://steamcommunity.com/market/listings/730/*"
      ],
-     "css": ["scripts/styles/content.css"]
+     "css": ["styles/content.css"]
     }
   ],
   "background": {
@@ -42,8 +43,9 @@
       "matches": ["<all_urls>"],
       "resources": [
         "scripts/data/marketids.json",
-        "scripts/images/buff163icon.png",
-        "scripts/images/pricempireicon.png"
+        "images/buff163icon.png",
+        "images/pricempireicon.png",
+        "images/checkedimg.png"
       ]
     }
   ]

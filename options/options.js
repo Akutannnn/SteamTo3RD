@@ -1,5 +1,7 @@
+
 const option1 = document.getElementById('Buff163check');
 const option2 = document.getElementById('Pricempirecheck');
+
 
 
 
@@ -24,7 +26,7 @@ const restoreOptions = chrome.storage.sync.get({
 
 restoreOptions();
 
+
 chrome.storage.onChanged.addListener((changes, area) => {
     restoreOptions();
 });
-
