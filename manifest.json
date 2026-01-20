@@ -1,6 +1,6 @@
 {
   "name": "SCM To 3rd Party",
-  "description": "Adds a button to lookup the item on another marketplace (e.g. Buff, Pricempire...)",
+  "description": "Adds buttons on Steam Community Market to lookup the item on third Party marketplaces (e.g. Buff, Pricempire...)",
   "version": "1.0",
   "manifest_version": 3,
   "options_ui": {
@@ -10,8 +10,7 @@
   
   "permissions": [
     "storage",
-    "activeTab",
-    "scripting"
+    "activeTab"
   ],
 
   "action": {
