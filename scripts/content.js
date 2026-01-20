@@ -1,4 +1,9 @@
-// OPTIONS
+//REFRESH WHEN OPTION CHANGE
+chrome.storage.onChanged.addListener((changes, area) => {
+    window.location.reload();;
+});
+
+
 let BuffEnabled;
 let PricempireEnabled;
 
@@ -33,15 +38,12 @@ console.log("SCM to 3rd party extension loaded.");
 //ITEM NAME EXTRACTION
 const URL = window.location.href;
 String(URL);
-
-
 let itemName;
 let itemNamedec;
-
 if (URL.includes("steamcommunity.com/market/listings/730")) {
 
     itemName = URL.split("/730/")[1];
-    itemName = itemName.split("?l")[0];
+    itemName = itemName.split("?")[0];
 
     itemNamedec = decodeURIComponent(itemName);
 };
@@ -97,10 +99,9 @@ if (BuffEnabled) {
 //PRICEMPIRE INTEGRATION (ONLY FOR SKINS)
 let pricempireinsert = "";
 if (PricempireEnabled) {
+    const pricempireimgurl = chrome.runtime.getURL('images/pricempireicon.png');
+    let PricempireURL = "https://pricempire.com/cs2-items/skin/"
     if (itemNamedec.includes("Factory New") || itemNamedec.includes("Minimal Wear") || itemNamedec.includes("Field-Tested") || itemNamedec.includes("Well-Worn") || itemNamedec.includes("Battle-Scarred")) {
-
-        const pricempireimgurl = chrome.runtime.getURL('images/pricempireicon.png');
-        let PricempireURL = "https://pricempire.com/cs2-items/skin/"
         let stattrak = false;
         let souvenir = false;
         let condition = null;
@@ -163,7 +164,23 @@ if (PricempireEnabled) {
         PricempireURL += "?variant=" + condition;
         }
         pricempireinsert = `<a href="${PricempireURL}" target="_blank"><img class="icons" src="${pricempireimgurl}" alt="Pricempire"></a>`;
-    }    
+    }
+    //VANILLA KNIVES
+    else if (!(itemNamedec.includes("|")) && itemNamedec.includes ("★")){
+        let vanillaname = ""
+        if (itemNamedec.includes("★ StatTrak™")){
+            vanillaname = (itemNamedec.replace("★ StatTrak™", "")).trim().toLowerCase();
+            vanillaname = vanillaname.replace(" ", "-");
+            PricempireURL += vanillaname;
+            PricempireURL += "?variant=stattrak";
+        }
+        else {
+            vanillaname = itemNamedec.replace("★", "").trim().toLowerCase();
+            vanillaname = vanillaname.replace(" ", "-");
+            PricempireURL += vanillaname;
+        }
+        pricempireinsert = `<a href="${PricempireURL}" target="_blank"><img class="icons" src="${pricempireimgurl}" alt="Pricempire"></a>`;
+    }
 };
 
 
@@ -174,7 +191,7 @@ async function buildAndInsert() {
 
     if (BuffEnabled) whattoinsert += buffinsert;
 
-    if (PricempireEnabled)whattoinsert += pricempireinsert;
+    if (PricempireEnabled) whattoinsert += pricempireinsert;
 
     whattoinsert += ` `;
     whattoinsert += `</div>`;
