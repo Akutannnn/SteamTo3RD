@@ -3,7 +3,7 @@
 ## Introduction
 
 I was a skins trader on CSGO from 2021 to 2023, until the release of CS2.  
-I've been doing it on and off and managed to make a lot of profit.  
+I've been doing it on and off and managed to make some profit.  
 But the release of CS2 as well as the fact that you could not use Buff163 without a Chinese bank account made me quit trading.  
 As skins were still a hobby for me, I decided to just find investing opportunities and invest in skins instead of trading them.  
 Here is my steam profile for those interested : [My Steam Profile](https://steamcommunity.com/profiles/76561199044961302)  
