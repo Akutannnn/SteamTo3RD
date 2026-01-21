@@ -13,11 +13,11 @@ Here is my steam profile for those interested : [My Steam Profile](https://steam
 It serves one simple goal, make it easy to navigate from Steamcommunity market to 3rd party marketplaces such as Buff163, Pricempire, Skinport etc.
 When you are on an item page e.g. AK-47 | Asiimov (Field-Tested), you can see 3rd party marketplaces icons just bellow the item's image. (c.f. image1)
 
-<img src="/images/scmscreen/itempage.png" alt="image1" width="450" />
+<img target="_blank" src="/images/scmscreen/itempage.png" alt="image1" width="450" />
 
 You can access the option pages by either clicking on the extension's icon on the top right of your Chrome, or by directly going on the options page by right clicking the icon then opening options.
 
-<img src="/images/scmscreen/options.png" alt="image2" width="450" />
+<img target="_blank" src="/images/scmscreen/options.png" alt="image2" width="450" />
 
 Currently only compatible for Google Chrome.
 
