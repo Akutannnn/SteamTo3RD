@@ -6,8 +6,13 @@ All notable changes to this project will be documented in this file.
 
 Support of :
 -CSFLOAT
--SKINPORT
 -BUFFMARKET
+
+## [1.0.2] 21/01/2026
+
+### Added
+
+Added Skinport.
 
 
 ## [1.0.1] 20/01/2026

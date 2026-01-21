@@ -4,13 +4,16 @@ chrome.storage.onChanged.addListener((changes, area) => {
 });
 
 
+
 let BuffEnabled;
 let PricempireEnabled;
+let SkinportEnabled;
 
 async function getOptions() {
     const opt = await chrome.storage.sync.get({
         BuffEnabled: true,
-        PricempireEnabled: true
+        PricempireEnabled: true,
+        SkinportEnabled: true
     });
         
         if (opt.BuffEnabled !== undefined) {
@@ -26,7 +29,14 @@ async function getOptions() {
         else {
             PricempireEnabled = true;
             console.log("Pricempire option not found, setting to default (enabled).");
+        };
+        if (opt.SkinportEnabled !== undefined) {
+            SkinportEnabled = opt.SkinportEnabled;
         }
+        else {
+            SkinportEnabled = true;
+            console.log("Skinport option not found, setting to default (enabled).");
+        };
 }
 
 async function main(){
@@ -70,7 +80,7 @@ let itemsDataPromise;
 
     function loadItemsData() {
     if (!itemsDataPromise) {
-        const url = chrome.runtime.getURL('scripts/data/marketids.json');
+        const url = chrome.runtime.getURL('/scripts/data/marketids.json');
         itemsDataPromise = fetch(url).then(r => r.json());
     }
     return itemsDataPromise;
@@ -81,7 +91,7 @@ let itemsDataPromise;
 let buffinsert = "";
 if (BuffEnabled) {
 
-    const buffimgurl = chrome.runtime.getURL('images/buff163icon.png');
+    const buffimgurl = chrome.runtime.getURL('/images/marketicons/buff163icon.png');
 
     function fetchBuff() {
         return loadItemsData().then((data) => {
@@ -99,7 +109,7 @@ if (BuffEnabled) {
 //PRICEMPIRE INTEGRATION (ONLY FOR SKINS)
 let pricempireinsert = "";
 if (PricempireEnabled) {
-    const pricempireimgurl = chrome.runtime.getURL('images/pricempireicon.png');
+    const pricempireimgurl = chrome.runtime.getURL('/images/marketicons/pricempireicon.png');
     let PricempireURL = "https://pricempire.com/cs2-items/skin/"
     if (itemNamedec.includes("Factory New") || itemNamedec.includes("Minimal Wear") || itemNamedec.includes("Field-Tested") || itemNamedec.includes("Well-Worn") || itemNamedec.includes("Battle-Scarred")) {
         let stattrak = false;
@@ -184,6 +194,96 @@ if (PricempireEnabled) {
 };
 
 
+let Skinportinsert = ""
+if (SkinportEnabled) {
+    const skinportimgurl = chrome.runtime.getURL('/images/marketicons/skinporticon.png');
+    let SkinportURL = "https://skinport.com/market?search=";
+    let searchname;
+    let stattrak = false;
+    let souvenir = false;
+    let exterior = null;
+
+    if (itemNamedec.includes("Factory New") || itemNamedec.includes("Minimal Wear") || itemNamedec.includes("Field-Tested") || itemNamedec.includes("Well-Worn") || itemNamedec.includes("Battle-Scarred")) {
+        if (itemNamedec.includes("Souvenir")) {
+            souvenir = false;
+            searchname = itemNamedec.replace("Souvenir", "").trim()
+        }
+        else if (itemNamedec.includes("StatTrak™")) {
+            stattrak = false;
+            searchname = itemNamedec.replace("StatTrak™", "")
+        }
+        else {
+            searchname = itemNamedec
+        };
+        if (itemNamedec.includes("Factory New")) exterior = 2;
+        else if (itemNamedec.includes("Minimal Wear")) exterior = 4;
+        else if (itemNamedec.includes("Field-Tested")) exterior = 3;
+        else if (itemNamedec.includes("Well-Worn")) exterior = 5;
+        else if (itemNamedec.includes("Battle-Scarred")) exterior = 1;
+
+
+    switch (exterior) {
+        case 2: searchname = searchname.replace("(Factory New)", ""); break;
+        case 4: searchname = searchname.replace("(Minimal Wear)", ""); break;
+        case 3: searchname = searchname.replace("(Field-Tested)", ""); break;
+        case 5: searchname = searchname.replace("(Well-Worn)", ""); break;
+        case 1: searchname = searchname.replace("(Battle-Scarred)", ""); break;
+        default: break;
+    }
+
+    SkinportURL += searchname.trim()
+
+
+    }
+
+    //VANILLE KNIVES
+    else if (!(itemNamedec.includes("|")) && itemNamedec.includes ("★")){
+        let vanillaname = ""
+        if (itemNamedec.includes("★ StatTrak™")) {
+            vanillaname = (itemNamedec.replace("★ StatTrak™", "")).trim().toLowerCase();
+            vanillaname = vanillaname.replace(" ", "-");
+            stattrak = true
+        }
+        else {
+            vanillaname = itemNamedec.replace("★", "").trim().toLowerCase();
+            vanillaname = vanillaname.replace(" ", "-");
+        }
+    SkinportURL = `https://skinport.com/market/knife/${vanillaname}?item=Vanilla`
+    }
+
+    if (stattrak) {
+        SkinportURL += "&stattrak=1"
+    }
+    else if (!stattrak) {
+        SkinportURL += "&stattrak=0"
+    };
+
+    if (souvenir) {
+        SkinportURL += "&souvenir=1"
+    }
+    else if (!souvenir) {
+        SkinportURL += "&souvenir=0"
+    };
+
+    if (exterior == null) {
+    }
+    else {
+        switch (exterior) {
+            case 2: SkinportURL += "&exterior=2"; break;
+            case 4: SkinportURL += "&exterior=4"; break;
+            case 3: SkinportURL += "&exterior=3"; break;
+            case 5: SkinportURL += "&exterior=5"; break;
+            case 1: SkinportURL += "&exterior=1"; break;
+            default: break;
+    }
+    };
+
+    SkinportURL += "&sort=price&order=asc";
+    Skinportinsert += `<a href="${SkinportURL}" target="_blank"><img class="icons" src="${skinportimgurl}" alt="Pricempire"></a>`;
+
+}
+
+
 
 //INSERTION IN PAGE
 async function buildAndInsert() {
@@ -192,6 +292,12 @@ async function buildAndInsert() {
     if (BuffEnabled) whattoinsert += buffinsert;
 
     if (PricempireEnabled) whattoinsert += pricempireinsert;
+
+    if (SkinportEnabled) whattoinsert += Skinportinsert;
+
+    if (BuffEnabled || PricempireEnabled || SkinportEnabled){
+        whattoinsert += `<h1>SCM to 3RD</h1>`
+    };
 
     whattoinsert += ` `;
     whattoinsert += `</div>`;

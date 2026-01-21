@@ -14,15 +14,15 @@
   ],
 
   "action": {
-    "default_popup": "popup/popup.html",
-    "default_icon": "/images/icon.png",
+    "default_popup": "/popup/popup.html",
+    "default_icon": "/images/scmicons/icon.png",
     "default_title": "SCM To 3rd Party"
   },
   "icons" : {
-    "16": "images/16.png",
-    "32": "images/32.png",
-    "48": "images/48.png",
-    "128": "images/128.png"
+    "16": "images/scmicons/16.png",
+    "32": "images/scmicons/32.png",
+    "48": "images/scmicons/48.png",
+    "128": "images/scmicons/128.png"
   },
   "content_scripts": [
   {
@@ -42,12 +42,10 @@
       "matches": ["<all_urls>"],
       "resources": [
         "scripts/data/marketids.json",
-        "images/buff163icon.png",
-        "images/pricempireicon.png",
-        "images/checkedimg.png"
+        "images/marketicons/buff163icon.png",
+        "images/marketicons/pricempireicon.png",
+        "images/marketicons/skinporticon.png"
       ]
     }
   ]
-
-
 }
