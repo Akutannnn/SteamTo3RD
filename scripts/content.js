@@ -8,14 +8,16 @@ chrome.storage.onChanged.addListener((changes, area) => {
 let BuffEnabled;
 let PricempireEnabled;
 let SkinportEnabled;
+let CsfloatEnabled;
 
 async function getOptions() {
     const opt = await chrome.storage.sync.get({
         BuffEnabled: true,
         PricempireEnabled: true,
-        SkinportEnabled: true
+        SkinportEnabled: true,
+        CsfloatEnabled:true
     });
-        
+        //Buff163 Setting
         if (opt.BuffEnabled !== undefined) {
             BuffEnabled = opt.BuffEnabled;
         }
@@ -23,6 +25,7 @@ async function getOptions() {
             BuffEnabled = true;
             console.log("Buff option not found, setting to default (enabled).");
         };
+        //Pricempire Setting
         if (opt.PricempireEnabled !== undefined) {
             PricempireEnabled = opt.PricempireEnabled;
         }
@@ -30,12 +33,21 @@ async function getOptions() {
             PricempireEnabled = true;
             console.log("Pricempire option not found, setting to default (enabled).");
         };
+        //Skinport Setting
         if (opt.SkinportEnabled !== undefined) {
             SkinportEnabled = opt.SkinportEnabled;
         }
         else {
             SkinportEnabled = true;
             console.log("Skinport option not found, setting to default (enabled).");
+        };
+        //Csfloat Setting
+        if (opt.CsfloatEnabled !== undefined) {
+            CsfloatEnabled = opt.CsfloatEnabled;
+        }
+        else {
+            CsfloatEnabled = true;
+            console.log("Csfloat option not found, setting to default (enabled).");
         };
 }
 
@@ -194,7 +206,7 @@ if (PricempireEnabled) {
 };
 
 
-let Skinportinsert = ""
+let skinportinsert = ""
 if (SkinportEnabled) {
     const skinportimgurl = chrome.runtime.getURL('/images/marketicons/skinporticon.png');
     let SkinportURL = "https://skinport.com/market?search=";
@@ -279,8 +291,15 @@ if (SkinportEnabled) {
     };
 
     SkinportURL += "&sort=price&order=asc";
-    Skinportinsert += `<a href="${SkinportURL}" target="_blank"><img class="icons" src="${skinportimgurl}" alt="Pricempire"></a>`;
+    skinportinsert += `<a href="${SkinportURL}" target="_blank"><img class="icons" src="${skinportimgurl}" alt="Skinport"></a>`;
 
+}
+
+let csfloatinsert = "";
+if (CsfloatEnabled) {
+    const csfloatimgurl = chrome.runtime.getURL('/images/marketicons/csfloaticon.png');
+    let CsfloatURL = `https://csfloat.com/search?market_hash_name=${itemNamedec}`;
+    csfloatinsert = `<a href="${CsfloatURL}" target="_blank"><img class="icons" src="${csfloatimgurl}" alt="Csfloat"></a>`;
 }
 
 
@@ -293,9 +312,11 @@ async function buildAndInsert() {
 
     if (PricempireEnabled) whattoinsert += pricempireinsert;
 
-    if (SkinportEnabled) whattoinsert += Skinportinsert;
+    if (SkinportEnabled) whattoinsert += skinportinsert;
 
-    if (BuffEnabled || PricempireEnabled || SkinportEnabled){
+    if (CsfloatEnabled) whattoinsert += csfloatinsert;
+
+    if (BuffEnabled || PricempireEnabled || SkinportEnabled || CsfloatEnabled){
         whattoinsert += `<h1>SCM to 3RD</h1>`
     };
 
