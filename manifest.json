@@ -31,7 +31,7 @@
     },
     {
     "js": ["scripts/inventory.js"],
-    "matches": ["https://steamcommunity.com/id/*/inventory", "https://steamcommunity.com/profiles/*/inventory"],
+    "matches": ["https://steamcommunity.com/*/inventory*"],
     "css": ["styles/invstyle.css"]
     }
   ],

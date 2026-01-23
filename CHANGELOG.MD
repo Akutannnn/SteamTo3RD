@@ -9,6 +9,12 @@ Support of :
 
 Pricempire for other than weapon skins item
 
+## [1.1.2] 24/01/2026
+
+### Fixed
+
+Fixed an issue where the extension would not work in inventory if the URL ends with a /.
+
 ## [1.1.1] 23/01/2026
 
 ### Fixed
