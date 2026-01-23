@@ -7,7 +7,13 @@ All notable changes to this project will be documented in this file.
 Support of :
 -BUFFMARKET
 
-Adding these buttons in inventory items.
+Pricempire for other than weapon skins item
+
+## [1.1.0] 23/01/2026
+
+### Added
+
+Added buttons in steam inventory.
 
 ## [1.0.3] 21/01/2026
 
