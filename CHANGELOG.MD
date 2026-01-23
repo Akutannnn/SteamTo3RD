@@ -9,6 +9,12 @@ Support of :
 
 Pricempire for other than weapon skins item
 
+## [1.1.1] 23/01/2026
+
+### Fixed
+
+Fixed Skinport link not working for items other than skins.
+
 ## [1.1.0] 23/01/2026
 
 ### Added
