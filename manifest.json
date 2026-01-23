@@ -24,12 +24,15 @@
     "128": "images/scmicons/128.png"
   },
   "content_scripts": [
-  {
-     "js": ["scripts/content.js"],
-     "matches": [
-       "https://steamcommunity.com/market/listings/730/*"
-     ],
-     "css": ["styles/content.css"]
+    {
+    "js": ["scripts/content.js"],
+    "matches": ["https://steamcommunity.com/market/listings/730/*"],
+    "css": ["styles/content.css"]
+    },
+    {
+    "js": ["scripts/inventory.js"],
+    "matches": ["https://steamcommunity.com/id/*/inventory", "https://steamcommunity.com/profiles/*/inventory"],
+    "css": ["styles/invstyle.css"]
     }
   ],
   "background": {
