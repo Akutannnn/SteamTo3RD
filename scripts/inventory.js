@@ -239,7 +239,11 @@ async function main() {
                 vanillaname = itemNamedec.replace("★", "").trim().toLowerCase();
                 vanillaname = vanillaname.replace(" ", "-");
             }
-        SkinportURL = `https://skinport.com/market/knife/${vanillaname}?item=Vanilla`
+            SkinportURL = `https://skinport.com/market/knife/${vanillaname}?item=Vanilla`
+        }
+
+        else {
+            SkinportURL += itemNamedec
         }
 
         if (stattrak) {
