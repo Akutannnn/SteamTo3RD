@@ -53,8 +53,6 @@ async function getOptions() {
 
 async function main(){
     await getOptions();
-
-
 console.log("SCM to 3rd party extension loaded.");
 
 //ITEM NAME EXTRACTION
@@ -244,7 +242,6 @@ if (SkinportEnabled) {
     }
 
     SkinportURL += searchname.trim()
-
 
     }
 
