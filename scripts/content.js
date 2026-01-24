@@ -260,6 +260,10 @@ if (SkinportEnabled) {
     SkinportURL = `https://skinport.com/market/knife/${vanillaname}?item=Vanilla`
     }
 
+    else {
+        SkinportURL += itemNamedec
+    }
+
     if (stattrak) {
         SkinportURL += "&stattrak=1"
     }
