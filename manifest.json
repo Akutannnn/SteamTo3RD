@@ -1,6 +1,6 @@
 {
-  "name": "SCM To 3rd Party",
-  "description": "Adds buttons on Steam Community Market to lookup the item on third Party marketplaces (e.g. Buff, Pricempire...)",
+  "name": "Steam To 3rd Party Marketplaces",
+  "description": "Adds buttons on Steam to lookup the item on third Party marketplaces (e.g. Buff, Pricempire...)",
   "version": "1.0",
   "manifest_version": 3,
   "options_ui": {
@@ -15,7 +15,7 @@
   "action": {
     "default_popup": "/popup/popup.html",
     "default_icon": "/images/scmicons/icon.png",
-    "default_title": "SCM To 3rd Party"
+    "default_title": "Steam To 3rd Party"
   },
   "icons" : {
     "16": "images/scmicons/16.png",

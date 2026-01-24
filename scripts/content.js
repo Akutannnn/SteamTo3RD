@@ -53,7 +53,7 @@ async function getOptions() {
 
 async function main(){
     await getOptions();
-console.log("SCM to 3rd party extension loaded.");
+console.log("Steam to 3rd party extension loaded.");
 
 //ITEM NAME EXTRACTION
 const URL = window.location.href;
@@ -318,7 +318,7 @@ async function buildAndInsert() {
     if (CsfloatEnabled) whattoinsert += csfloatinsert;
 
     if (BuffEnabled || PricempireEnabled || SkinportEnabled || CsfloatEnabled){
-        whattoinsert += `<h1>SCM to 3RD</h1>`
+        whattoinsert += `<h1>Steam to 3RD Party</h1>`
     };
 
     whattoinsert += ` `;
