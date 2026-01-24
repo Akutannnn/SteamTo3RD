@@ -29,4 +29,4 @@ Currently only compatible for Google Chrome.
 -Click "Load unpacked" on the top left  
 -Choose the extracted folder and voilà  
 
-(Currently waiting approval by Google to get listed as an extension)
+(Currently waiting approval from Google to get listed as an extension)
