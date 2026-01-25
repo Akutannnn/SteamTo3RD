@@ -4,10 +4,16 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
-Support of :
+Support of :  
 -BUFFMARKET
 
 Pricempire for other than weapon skins item
+
+## [1.1.3] 25/01/2026
+
+### Added
+
+Pricempire now supports containers. If the item isn’t a skin or a container, it defaults to a Pricempire search.
 
 ## [1.1.2] 24/01/2026
 
