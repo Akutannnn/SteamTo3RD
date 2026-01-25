@@ -183,6 +183,15 @@ async function main() {
             }
             pricempireinsert = `<a href="${PricempireURL}" target="_blank"><img class="icons" src="${pricempireimgurl}" alt="Pricempire"></a>`;
         }
+        else if (itemNamedec.toLowerCase().includes("case") && !(itemNamedec.includes("|"))){
+            let casename = itemNamedec.replaceAll(" ", "-").replaceAll(":", "").toLowerCase();
+            PricempireURL = `https://pricempire.com/cs2-items/container/${casename}?variant=${casename}`;
+            pricempireinsert = `<a href="${PricempireURL}" target="_blank"><img class="icons" src="${pricempireimgurl}" alt="Pricempire"></a>`;
+        }
+        else {
+            PricempireURL = `https://pricempire.com/cs2-skin-search?q=${itemNamedec}`;
+            pricempireinsert = `<a href="${PricempireURL}" target="_blank"><img class="icons" src="${pricempireimgurl}" alt="Pricempire"></a>`;
+        }
     };
 
 
