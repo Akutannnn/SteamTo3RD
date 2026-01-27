@@ -9,13 +9,15 @@ let BuffEnabled;
 let PricempireEnabled;
 let SkinportEnabled;
 let CsfloatEnabled;
+let SteammarketEnabled;
 
 async function getOptions() {
     const opt = await chrome.storage.sync.get({
         BuffEnabled: true,
         PricempireEnabled: true,
         SkinportEnabled: true,
-        CsfloatEnabled:true
+        CsfloatEnabled:true,
+        SteammarketEnabled:true
     });
         //Buff163 Setting
         if (opt.BuffEnabled !== undefined) {
@@ -49,6 +51,14 @@ async function getOptions() {
             CsfloatEnabled = true;
             console.log("Csfloat option not found, setting to default (enabled).");
         };
+        //Check if extension enabled on Steam Market Setting
+        if (opt.SteammarketEnabled !== undefined) {
+            SteammarketEnabled = opt.SteammarketEnabled;
+        }
+        else {
+            SteammarketEnabled = true;
+            console.log("Steam Market option not found, setting to default (enabled).");
+        }
 }
 
 async function main(){
@@ -340,4 +350,12 @@ buildAndInsert()
 
 }
 
-main()
+(async () => {
+    await getOptions();
+    if (SteammarketEnabled) {
+        main();
+    }
+    else {
+        console.log("Extension disabled on Steam Market.");
+    }
+})();

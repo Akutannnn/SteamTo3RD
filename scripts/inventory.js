@@ -4,13 +4,15 @@ let BuffEnabled;
 let PricempireEnabled;
 let SkinportEnabled;
 let CsfloatEnabled;
+let SteaminventoryEnabled;
 
 async function getOptions() {
     const opt = await chrome.storage.sync.get({
         BuffEnabled: true,
         PricempireEnabled: true,
         SkinportEnabled: true,
-        CsfloatEnabled:true
+        CsfloatEnabled:true,
+        SteaminventoryEnabled:true
     });
         //Buff163 Setting
         if (opt.BuffEnabled !== undefined) {
@@ -43,6 +45,14 @@ async function getOptions() {
         else {
             CsfloatEnabled = true;
             console.log("Csfloat option not found, setting to default (enabled).");
+        };
+        //Check if extension enabled on Steam Inventory Setting
+        if (opt.SteaminventoryEnabled !== undefined) {
+            SteaminventoryEnabled = opt.SteaminventoryEnabled;
+        }
+        else {
+            SteaminventoryEnabled = true;
+            console.log("Steam Inventory option not found, setting to default (enabled).");
         };
 }
 
@@ -341,6 +351,16 @@ const observer = new MutationObserver(() => { //Observe DOM changes to update wh
     Debounce = setTimeout(() => {
       main()  
     }, 50);
-})
+});
 
-observer.observe(document.body, {childList: true, subtree: true})
+
+(async() => {
+    await getOptions();
+    if (SteaminventoryEnabled) {
+        observer.observe(document.body, {childList: true, subtree: true});
+    }
+    else {
+        observer.disconnect();
+        console.log("Extension disabled in Steam Inventory.");
+    }
+})();
