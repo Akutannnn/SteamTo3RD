@@ -11,7 +11,7 @@ Support of :
 
 ### Added
 
-Added setting to enable/disable extension on Steam Community Market.
+Added setting to enable/disable extension on Steam Community Market.  
 Added setting to enable/disable extension in Steam inventory.
 
 ## [1.1.3] 25/01/2026
