@@ -30,6 +30,7 @@ h1 {
   display: inline-block;
   width: 60px;
   height: 34px;
+  margin: 5px;
 }
 
 .switch input {
@@ -86,7 +87,7 @@ input:checked + .slider:before {
 
 table {
     margin : auto;
-    margin-top : 20px;
+    margin-top : 42px;
     margin-bottom : 14px;
     align-items : center;
 }
@@ -101,4 +102,13 @@ td {
 .icons {
     height : 64px;
     width : auto;
+}
+
+.genopt {
+    font-weight: bold;
+    color: rgb(232, 232, 232);
+}
+
+#lastgenopt td {
+    padding-bottom : 46px;
 }

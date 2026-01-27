@@ -1,5 +1,5 @@
- body {
-        width : 250px;
+body {
+        width : 300px;
         height : auto;
         font-family : Arial, sans-serif;
         text-align : center;
@@ -31,7 +31,7 @@ td {
 }
 
 .icons {
-    height : 44px;
+    height : 54px;
     width : auto;
 }
 
@@ -93,4 +93,18 @@ input:checked + .slider:before {
 
 .slider.round:before {
   border-radius: 50%;
+}
+
+.genopt {
+    font-weight: bold;
+    font-size: 110%;
+    color: rgb(232, 232, 232);
+}
+
+td {
+  padding : 10px 10px 4px;
+}
+
+#lastgenopt td {
+    padding-bottom : 24px;
 }
