@@ -7,7 +7,12 @@ All notable changes to this project will be documented in this file.
 Support of :  
 -BUFFMARKET
 
-Pricempire for other than weapon skins item
+## [1.1.4] 27/01/2026
+
+### Added
+
+Setting to enable/disable extension on Steam Community Market
+Setting to enable/disable extension in Steam inventory
 
 ## [1.1.3] 25/01/2026
 
