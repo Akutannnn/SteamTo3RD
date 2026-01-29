@@ -100,7 +100,7 @@ let itemsDataPromise;
 
     function loadItemsData() {
     if (!itemsDataPromise) {
-        const url = chrome.runtime.getURL('/scripts/data/marketids.json');
+        const url = chrome.runtime.getURL('/data/marketids.json');
         itemsDataPromise = fetch(url).then(r => r.json());
     }
     return itemsDataPromise;
