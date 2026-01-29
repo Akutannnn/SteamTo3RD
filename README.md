@@ -1,4 +1,4 @@
-# SCM to 3RD party marketplaces
+# Steam to 3RD party marketplaces
 
 ## Introduction
 
@@ -8,7 +8,7 @@ But the release of CS2 as well as the fact that you could not use Buff163 withou
 As skins were still a hobby for me, I decided to just find investing opportunities and invest in skins instead of trading them.  
 Here is my steam profile for those interested : [My Steam Profile](https://steamcommunity.com/profiles/76561199044961302)  
 
-## What SCM to 3RD does
+## What Steam to 3RD does
 
 It serves one simple goal, make it easy to navigate from the Steam community market to 3rd party marketplaces such as Buff163, Pricempire, Skinport etc.  
 When you are on an item page e.g. AK-47 | Asiimov (Field-Tested), you can see 3rd party marketplaces icons just bellow the item's image. (c.f. image1)  
