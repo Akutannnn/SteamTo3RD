@@ -29,4 +29,4 @@ Currently only compatible for Google Chrome.
 -Click "Load unpacked" on the top left  
 -Choose the extracted folder and voilà  
 
-(Currently waiting approval from Google to get listed as an extension)
+[(Install as Chrome extension)](https://chromewebstore.google.com/detail/steam-to-3rd-party-market/ckofccdioldgbedmfhngjomggaboolhp)
