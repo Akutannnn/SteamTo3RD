@@ -22,7 +22,11 @@ You can access the option pages by either clicking on the extension's icon on th
 Currently only compatible for Google Chrome.  
 
 ## Installation
+  
+[(Install as Chrome extension)](https://chromewebstore.google.com/detail/steam-to-3rd-party-market/ckofccdioldgbedmfhngjomggaboolhp)  
 
+OR  
+  
 -Download the file  
 -Extract it  
 -Open "chrome://extensions/" (copy paste it in your browser's search bar)  
