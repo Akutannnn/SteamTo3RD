@@ -4,12 +4,13 @@ chrome.storage.onChanged.addListener((changes, area) => {
 });
 
 
-
 let BuffEnabled;
 let PricempireEnabled;
 let SkinportEnabled;
 let CsfloatEnabled;
 let SteammarketEnabled;
+let CsgoskinsEnabled;
+
 
 async function getOptions() {
     const opt = await chrome.storage.sync.get({
@@ -17,6 +18,7 @@ async function getOptions() {
         PricempireEnabled: true,
         SkinportEnabled: true,
         CsfloatEnabled:true,
+        CsgoskinsEnabled:true,
         SteammarketEnabled:true
     });
         //Buff163 Setting
@@ -50,6 +52,14 @@ async function getOptions() {
         else {
             CsfloatEnabled = true;
             console.log("Csfloat option not found, setting to default (enabled).");
+        };
+        //Csgoskins Setting
+        if (opt.CsgoskinsEnabled !== undefined) {
+            CsgoskinsEnabled = opt.CsgoskinsEnabled;
+        }
+        else {
+            CsgoskinsEnabled = true;
+            console.log("Csgoskins option not found, setting to default (enabled).");
         };
         //Check if extension enabled on Steam Market Setting
         if (opt.SteammarketEnabled !== undefined) {
@@ -165,10 +175,11 @@ if (PricempireEnabled) {
 
         //Get Weapon
         let weaponname = itemNamedec.split(" | ")[0];
-        weaponname = weaponname.replace("StatTrak™ ", "");
-        weaponname = weaponname.replace("Souvenir ", "");
-        weaponname = weaponname.replace(" ", "-");
-        weaponname = weaponname.toLowerCase();
+        weaponname = weaponname
+            .replace("StatTrak™ ", "")
+            .replace("Souvenir ", "")
+            .replaceAll(" ", "-")
+            .toLowerCase()
 
         //Get Finish
         let finishname = itemNamedec.split(" | ")[1];
@@ -179,8 +190,13 @@ if (PricempireEnabled) {
         finishname = finishname.replace(regex, "");
 
 
-        finishname = finishname.replace(" ", "-");
-        finishname = finishname.toLowerCase();
+        finishname = finishname
+            .replace("♥", "")
+            .replace("龍王 ", "")
+            .replace("(", "")
+            .replace(")", "")
+            .replaceAll(" ", "-")
+            .toLowerCase();
 
         //Construct URL
         PricempireURL += weaponname + "-" + finishname;
@@ -234,11 +250,11 @@ if (SkinportEnabled) {
 
     if (itemNamedec.includes("Factory New") || itemNamedec.includes("Minimal Wear") || itemNamedec.includes("Field-Tested") || itemNamedec.includes("Well-Worn") || itemNamedec.includes("Battle-Scarred")) {
         if (itemNamedec.includes("Souvenir")) {
-            souvenir = false;
+            souvenir = true;
             searchname = itemNamedec.replace("Souvenir", "").trim()
         }
-        else if (itemNamedec.includes("StatTrak™")) {
-            stattrak = false;
+        if (itemNamedec.includes("StatTrak™")) {
+            stattrak = true;
             searchname = itemNamedec.replace("StatTrak™", "")
         }
         else {
@@ -315,12 +331,56 @@ if (SkinportEnabled) {
 
 }
 
-let csfloatinsert = "";
-if (CsfloatEnabled) {
-    const csfloatimgurl = chrome.runtime.getURL('/images/marketicons/csfloaticon.png');
-    let CsfloatURL = `https://csfloat.com/search?market_hash_name=${itemNamedec}`;
-    csfloatinsert = `<a href="${CsfloatURL}" target="_blank"><img class="icons" src="${csfloatimgurl}" alt="Csfloat"></a>`;
+//CSGOSKINS INTEGRATION
+let csgoskinsinsert = "";
+if (CsgoskinsEnabled) {
+    const csgoskinsimgurl = chrome.runtime.getURL('/images/marketicons/csgoskinsicon.png');
+    let csgoskinsname = ""
+
+    if (!(itemNamedec.includes("|")) && itemNamedec.includes ("★")) {
+        if (itemNamedec.includes("★ StatTrak™")) {
+            csgoskinsname = itemNamedec.replace("★ StatTrak™ ", "").trim().toLowerCase();
+        }
+        else {
+            csgoskinsname = itemNamedec.replace("★ ", "").trim().toLowerCase();
+        }
+        csgoskinsname = csgoskinsname
+            .replace(" | ", "-")
+            .trim()
+            .replace(" ", "-")
+            .toLowerCase()
+        csgoskinsname += "-vanilla"
+    }
+    else if (itemNamedec.includes("Factory New") || itemNamedec.includes("Minimal Wear") || itemNamedec.includes("Field-Tested") || itemNamedec.includes("Well-Worn") || itemNamedec.includes("Battle-Scarred")) {
+        csgoskinsname = itemNamedec
+            .replace("(Factory New)", "")
+            .replace("(Minimal Wear)", "")
+            .replace("(Field-Tested)", "")
+            .replace("(Well-Worn)", "")
+            .replace("(Battle-Scarred)", "")
+            .replace("Souvenir ", "")
+            .replace("★ StatTrak™ ", "")
+            .replace("StatTrak™ ", "")
+            .replace(" | ", "-")
+            .replace("♥", "")
+            .replace("龍王 ", "")
+            .replace("(", "")
+            .replace(")", "")
+            .trim()
+            .replaceAll(" ", "-")
+            .toLowerCase()
+    }
+    else {
+        csgoskinsname = itemNamedec
+            .replace(":", "")
+            .trim()
+            .replaceAll(" ", "-")
+            .toLowerCase()}
+
+    const csgoskinsurl = `https://csgoskins.gg/items/${csgoskinsname}`
+    csgoskinsinsert = `<a href="${csgoskinsurl}" target="_blank"><img class="icons" src="${csgoskinsimgurl}" alt="Csgoskins"></a>`;
 }
+
 
 
 
@@ -336,7 +396,9 @@ async function buildAndInsert() {
 
     if (CsfloatEnabled) whattoinsert += csfloatinsert;
 
-    if (BuffEnabled || PricempireEnabled || SkinportEnabled || CsfloatEnabled){
+    if (CsgoskinsEnabled) whattoinsert += csgoskinsinsert;
+
+    if (BuffEnabled || PricempireEnabled || SkinportEnabled || CsfloatEnabled || CsgoskinsEnabled){
         whattoinsert += `<h1>Steam to 3RD Party</h1>`
     };
 

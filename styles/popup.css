@@ -1,5 +1,5 @@
 body {
-        width : 300px;
+        width : 400px;
         height : auto;
         font-family : Arial, sans-serif;
         text-align : center;
@@ -19,12 +19,12 @@ h1 {
 
 
 table {
-    margin : 20px auto 18px;
+    margin : 20px auto 30px;
     align-items : center;
 }
 
 td {
-    padding : 10px 20px 8px;
+    padding : 10px 10px 4px;
     font-size : 1.4em;
     color : white;
     text-align : left;
@@ -33,8 +33,12 @@ td {
 .icons {
     height : 54px;
     width : auto;
+    max-width: 70px
 }
 
+.righticons {
+  margin-left: 50px;
+}
 
 .switch {
   position: relative;
@@ -99,12 +103,5 @@ input:checked + .slider:before {
     font-weight: bold;
     font-size: 110%;
     color: rgb(232, 232, 232);
-}
-
-td {
-  padding : 10px 10px 4px;
-}
-
-#lastgenopt td {
-    padding-bottom : 24px;
+    width: auto;
 }

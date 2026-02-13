@@ -104,6 +104,10 @@ td {
     width : auto;
 }
 
+.righticons {
+  margin-left: 80px;
+}
+
 .genopt {
     font-weight: bold;
     color: rgb(232, 232, 232);

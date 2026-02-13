@@ -6,6 +6,18 @@ All notable changes to this project will be documented in this file.
 
 Support of :  
 -BUFFMARKET
+-CSGOStash (clash.gg)
+
+## [1.1.5] 13/02/2026
+
+### Added
+
+Added CSGOSKINS.GG buttons
+
+### Fixed
+
+Fixed an issue where Skinport buttons wouldn't consider StatTrak or Souvenir states.
+Fixed special cases for these two skins : M4A4 | 龍王 (Dragon King) ; Sawed-Off | Kiss♥Love
 
 ## [1.1.4] 27/01/2026
 

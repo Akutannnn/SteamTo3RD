@@ -1,7 +1,7 @@
 {
   "name": "Steam To 3rd Party Marketplaces",
   "description": "Adds buttons on Steam to lookup the item on third Party marketplaces (e.g. Buff, Pricempire...)",
-  "version": "1.1.4",
+  "version": "1.1.5",
   "manifest_version": 3,
   "options_ui": {
     "page": "options/options.html",
@@ -43,7 +43,8 @@
         "images/marketicons/buff163icon.png",
         "images/marketicons/pricempireicon.png",
         "images/marketicons/skinporticon.png",
-        "images/marketicons/csfloaticon.png"
+        "images/marketicons/csfloaticon.png",
+        "images/marketicons/csgoskinsicon.png"
       ]
     }
   ]
