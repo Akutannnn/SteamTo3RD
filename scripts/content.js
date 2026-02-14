@@ -8,8 +8,8 @@ let BuffEnabled;
 let PricempireEnabled;
 let SkinportEnabled;
 let CsfloatEnabled;
-let SteammarketEnabled;
 let CsgoskinsEnabled;
+let SteammarketEnabled;
 
 
 async function getOptions() {
@@ -280,7 +280,7 @@ if (SkinportEnabled) {
 
     }
 
-    //VANILLE KNIVES
+    //VANILLA KNIVES
     else if (!(itemNamedec.includes("|")) && itemNamedec.includes ("★")){
         let vanillaname = ""
         if (itemNamedec.includes("★ StatTrak™")) {
@@ -329,6 +329,14 @@ if (SkinportEnabled) {
     SkinportURL += "&sort=price&order=asc";
     skinportinsert += `<a href="${SkinportURL}" target="_blank"><img class="icons" src="${skinportimgurl}" alt="Skinport"></a>`;
 
+}
+
+//CSFLOAT INTEGRATION
+let csfloatinsert = "";
+if (CsfloatEnabled) {
+    const csfloatimgurl = chrome.runtime.getURL('/images/marketicons/csfloaticon.png');
+    let CsfloatURL = `https://csfloat.com/search?market_hash_name=${itemNamedec}`;
+    csfloatinsert = `<a href="${CsfloatURL}" target="_blank"><img class="icons" src="${csfloatimgurl}" alt="Csfloat"></a>`;
 }
 
 //CSGOSKINS INTEGRATION
@@ -380,8 +388,6 @@ if (CsgoskinsEnabled) {
     const csgoskinsurl = `https://csgoskins.gg/items/${csgoskinsname}`
     csgoskinsinsert = `<a href="${csgoskinsurl}" target="_blank"><img class="icons" src="${csgoskinsimgurl}" alt="Csgoskins"></a>`;
 }
-
-
 
 
 //INSERTION IN PAGE
