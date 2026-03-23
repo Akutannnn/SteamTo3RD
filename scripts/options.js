@@ -4,6 +4,7 @@ const option3 = document.getElementById('Skinportcheck');
 const option4 = document.getElementById('Csfloatcheck');
 const option5 = document.getElementById('Steammarketcheck');
 const option6 = document.getElementById('Steaminventorycheck');
+const option7 = document.getElementById('Csgoskinscheck');
 
 
 option1.addEventListener('change', () => {
@@ -30,6 +31,10 @@ option6.addEventListener('change', () => {
     chrome.storage.sync.set({ SteaminventoryEnabled: option6.checked });
 });
 
+option7.addEventListener('change', () => {
+    chrome.storage.sync.set({ CsgoskinsEnabled: option7.checked });
+});
+
 
 function restoreOptions() {
 const restoreOptions = chrome.storage.sync.get({
@@ -37,6 +42,7 @@ const restoreOptions = chrome.storage.sync.get({
     PricempireEnabled: true,
     SkinportEnabled: true,
     CsfloatEnabled: true,
+    CsgoskinsEnabled: true,
     SteammarketEnabled: true,
     SteaminventoryEnabled: true
 }).then((items) => {
@@ -46,6 +52,7 @@ const restoreOptions = chrome.storage.sync.get({
     option4.checked = items.CsfloatEnabled;
     option5.checked = items.SteammarketEnabled;
     option6.checked = items.SteaminventoryEnabled;
+    option7.checked = items.CsgoskinsEnabled;
 })};
 
 restoreOptions();
